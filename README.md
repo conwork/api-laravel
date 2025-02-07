@@ -53,6 +53,12 @@ php artisan db:seed
 ```
 Seeds user with the `.env` (`USER_*`) data
 
+# Application
+## routes
+- `GET` `/` (sanctum authenticated)
+- `POST` `/auth/login` `{ "email": "user@conwork.io", "password": "password" }`
+- `GET` `/auth/logout` (sanctum authenticated)
+
 # Tasks
 ## 1. Create `Article` migration & model
 Props:
@@ -63,7 +69,7 @@ Relations:
 - `Article->author()`
 - `User->articles()`
 
-## 2. Create `Article` routes (sanctum auth)
+## 2. Create `Article` routes (sanctum authenticated)
 `Article` input validation:
 - `title`: required && max-length: 255
 - `article`: required
@@ -83,7 +89,7 @@ Routes:
 ## 3. Create `UserPreferences` middleware and apply to sanctum auth routes
 Get preferences from authenticated request user (`$user->preferences`), check for `locale` preference and change app lang / locale correspondingly.
 
-`config('app.available_locales')` returns the application available languages: `['en', 'es']`
+`config('app.available_locales')` contains the application available languages: `['en', 'es']`
 
 Prepared translations for `Article` routes responses can be found under:
 - `/lang/en/article.php | /lang/es/article.php`:

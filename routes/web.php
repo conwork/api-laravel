@@ -1,7 +1,7 @@
 <?php
+use Dedoc\Scramble\Scramble;
 
-use Illuminate\Support\Facades\Route;
-
-Route::get('/', function () {
-    return view('welcome');
-});
+if (!app()->environment('production')) {
+    Scramble::registerUiRoute('docs');
+    Scramble::registerJsonSpecificationRoute('docs.json');
+}

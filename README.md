@@ -54,12 +54,20 @@ php artisan db:seed
 Seeds user with the `.env` (`USER_*`) data
 
 # Application
+
 ## routes
 - `GET` `/` (sanctum authenticated)
 - `POST` `/auth/login` `{ "email": "user@conwork.io", "password": "password" }`
 - `GET` `/auth/logout` (sanctum authenticated)
 
+### Documentation
+- `GET` `/docs`
+- `GET` `/docs.json`
+
+`/insomina-document.json` file also available.
+
 # Tasks
+
 ## 1. Create `Article` migration & model
 Props:
 - `title: string (255)`

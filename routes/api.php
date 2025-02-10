@@ -14,7 +14,7 @@ Route::middleware([AcceptJson::class, 'api'])->group(function () {
         Route::get('/logout', 'logout')->middleware(['auth:sanctum'])->name('auth.logout');
     });
 
-    Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => ['auth:sanctum', 'user.preferences']
+    Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => ['auth:sanctum']
     ], function () {
         Route::get('/', [HomeController::class, 'index'])->name('home');
         Route::apiResource('articles', ArticleController::class);

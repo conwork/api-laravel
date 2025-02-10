@@ -49,4 +49,10 @@ class User extends Authenticatable
             'preferences' => 'array'
         ];
     }
+
+
+    public function articles(): HasMany
+    {
+        return $this->hasMany(Article::class);
+    }
 }

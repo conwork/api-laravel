@@ -57,9 +57,22 @@ class ArticleController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(ArticleRequest $request, string $id)
     {
-        //
+        try {
+            $article = Article::findOrFail($id);
+            if (auth()->user()->id !== $article->user_id) {
+                return response()->json([
+                    'message' => 'No tienes permisos para editar este articulo'
+                ], 403);
+            }
+            $article->update($request->validated());
+            return response()->json(new ArticleResource($article));
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => $e->getMessage(),
+            ], 404);
+        }
     }
 
     /**
